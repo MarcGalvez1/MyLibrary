@@ -10,14 +10,14 @@ function Book(title, author, numPages) {
 Book.prototype.createCard = function() {
   // Creates cards to display the books
   const cardRow = document.getElementById('card-row');
-  if (cardRow.childElementCount % 12 === 0) {
+  if (cardRow.childElementCount % 6 === 0) {
       // Create a new row when you reach 12 cards
       const newRow = document.createElement('div');
       newRow.classList.add('row');
       cardRow.appendChild(newRow);
   }
   const card = document.createElement('div');
-  card.classList.add('card', 'col', 'mx-3', 'mt-2');
+  card.classList.add('card', 'col-auto', 'mx-3', 'mt-2');
 
   const cardTtl = document.createElement('h5');
   cardTtl.classList.add('card-title');
@@ -35,9 +35,7 @@ Book.prototype.createCard = function() {
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
   this.cardContainer.appendChild(card);
-  // Append the card to the last created row
-  const lastRow = cardRow.lastChild;
-  lastRow.appendChild(card);
+
 
       
 }
