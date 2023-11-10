@@ -30,21 +30,25 @@ Book.prototype.createCard = function() {
 
 
   if (this.cardContainer.childElementCount === 0) {
+    // creates row if it doesn't already exist
     this.createRow();
   }
-  
+  // Keeps track of last row created
   let currentRow = this.cardContainer.lastChild;
   
-  if (currentRow.childElementCount < 6) {
+  if (currentRow.childElementCount < 5) {
+    // Adds ensures that there are 5 card elements in a row
     currentRow.appendChild(card);
   } else {
-    
+    // creates new row after 5 cards are added and adds the 1st card in that row.
     this.createRow();
     currentRow = this.cardContainer.lastChild;
+    currentRow.appendChild(card);
   }
     
 }
 Book.prototype.createRow = function() {
+  // Used to create rows
   const cardRow = document.createElement('div');
   cardRow.classList.add('row');
   cardRow.id = 'row-' + this.cardContainer.childElementCount;
@@ -56,7 +60,7 @@ Book.prototype.createRow = function() {
 
 
 function addBookToLibrary(book) {
-  // do stuff here
+  // add books to myLibrary array
   
   if (!isBookInArray(myLibrary, book)) { 
     myLibrary.push(book);
