@@ -3,21 +3,14 @@ function Book(title, author, numPages) {
     this.title = title;
     this.author = author;
     this.numPages = numPages;
-    this.cardContainer = document.getElementById("card-row");
-
+    this.cardContainer = document.getElementById("content-container");
 }
 
 Book.prototype.createCard = function() {
   // Creates cards to display the books
-  const cardRow = document.getElementById('card-row');
-  if (cardRow.childElementCount % 6 === 0) {
-      // Create a new row when you reach 12 cards
-      const newRow = document.createElement('div');
-      newRow.classList.add('row');
-      cardRow.appendChild(newRow);
-  }
+
   const card = document.createElement('div');
-  card.classList.add('card', 'col-auto', 'mx-3', 'mt-2');
+  card.classList.add('card', 'col-2', 'ms-3', 'mt-2');
 
   const cardTtl = document.createElement('h5');
   cardTtl.classList.add('card-title');
@@ -34,11 +27,31 @@ Book.prototype.createCard = function() {
   card.appendChild(cardTtl);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
-  this.cardContainer.appendChild(card);
 
 
-      
+  if (this.cardContainer.childElementCount === 0) {
+    this.createRow();
+  }
+  
+  let currentRow = this.cardContainer.lastChild;
+  
+  if (currentRow.childElementCount < 6) {
+    currentRow.appendChild(card);
+  } else {
+    
+    this.createRow();
+    currentRow = this.cardContainer.lastChild;
+  }
+    
 }
+Book.prototype.createRow = function() {
+  const cardRow = document.createElement('div');
+  cardRow.classList.add('row');
+  cardRow.id = 'row-' + this.cardContainer.childElementCount;
+  this.cardContainer.appendChild(cardRow);
+}
+
+
 
 
 
