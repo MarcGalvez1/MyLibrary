@@ -1,59 +1,71 @@
-function Book(title, author, numPages) {
-  // the constructor...
+class Book {
+  constructor(title, author, numPages) {
+    // the constructor...
     this.title = title;
     this.author = author;
     this.numPages = numPages;
     this.cardContainer = document.getElementById("content-container");
-}
-
-Book.prototype.createCard = function() {
-  // Creates cards to display the books
-
-  const card = document.createElement('div');
-  card.classList.add('card', 'col-2', 'ms-3', 'mt-2');
-
-  const cardTtl = document.createElement('h5');
-  cardTtl.classList.add('card-title');
-  cardTtl.textContent = this.title;
-
-  const cardAuthor = document.createElement('h6');
-  cardAuthor.classList.add('card-subtitle', 'mb-2', 'text-muted');
-  cardAuthor.textContent = this.author;
-
-  const cardPages = document.createElement('p');
-  cardPages.classList.add("card-text");
-  cardPages.textContent = "Number of Pages: " + this.numPages; 
-
-  card.appendChild(cardTtl);
-  card.appendChild(cardAuthor);
-  card.appendChild(cardPages);
-
-
-  if (this.cardContainer.childElementCount === 0) {
-    // creates row if it doesn't already exist
-    this.createRow();
   }
-  // Keeps track of last row created
-  let currentRow = this.cardContainer.lastChild;
-  
-  if (currentRow.childElementCount < 5) {
-    // Adds ensures that there are 5 card elements in a row
-    currentRow.appendChild(card);
-  } else {
-    // creates new row after 5 cards are added and adds the 1st card in that row.
-    this.createRow();
-    currentRow = this.cardContainer.lastChild;
-    currentRow.appendChild(card);
+  createCard() {
+    // Creates cards to display the books
+    const card = document.createElement('div');
+    card.classList.add('card', 'col-1', 'ms-3', 'mt-2');
+
+    const cardTtl = document.createElement('h5');
+    cardTtl.classList.add('card-title');
+    cardTtl.textContent = this.title;
+
+    const cardAuthor = document.createElement('h6');
+    cardAuthor.classList.add('card-subtitle', 'mb-2', 'text-muted');
+    cardAuthor.textContent = this.author;
+
+    const cardPages = document.createElement('p');
+    cardPages.classList.add("card-text");
+    cardPages.textContent = "Number of Pages: " + this.numPages;
+
+    card.appendChild(cardTtl);
+    card.appendChild(cardAuthor);
+    card.appendChild(cardPages);
+
+
+    this.displayCard(card);
   }
-    
+
+  createRow() {
+    // Used to create rows
+    const cardRow = document.createElement('div');
+    cardRow.classList.add('row','justify-content-center');
+    cardRow.id = 'row-' + this.cardContainer.childElementCount;
+    this.cardContainer.appendChild(cardRow);
+  }
+
+
+  displayCard(card) {
+    // Keeps track of last row created
+    let currentRow  = this.cardContainer.lastElementChild;
+
+    if (this.cardContainer.childElementCount === 0) {
+      //creates row if it doesn't already exist
+      this.createRow();
+      currentRow  = this.cardContainer.lastChild;
+    }
+
+    console.log(currentRow);
+
+    if (currentRow.childElementCount < 5) {
+      // Adds ensures that there are 5 card elements in a row
+      currentRow.appendChild(card);
+      console.log(currentRow);
+    } else {
+      // creates new row after 5 cards are added and adds the 1st card in that row.
+      this.createRow();
+      currentRow = this.cardContainer.lastChild;
+      currentRow.appendChild(card);
+    }
+  }
+
 }
-Book.prototype.createRow = function() {
-  // Used to create rows
-  const cardRow = document.createElement('div');
-  cardRow.classList.add('row');
-  cardRow.id = 'row-' + this.cardContainer.childElementCount;
-  this.cardContainer.appendChild(cardRow);
-}
+
 
 
 
