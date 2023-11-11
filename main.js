@@ -5,6 +5,7 @@ class Book {
     this.author = author;
     this.numPages = numPages;
     this.cardContainer = document.getElementById("content-container");
+    this.currentRow = this.cardContainer.lastElementChild;
   }
   createCard() {
     // Creates cards to display the books
@@ -26,7 +27,12 @@ class Book {
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('btn', 'btn-danger');
     deleteBtn.textContent = "Delete Book";
-
+    deleteBtn.id = 'delete-' + this.currentRow.childElementCount;
+    deleteBtn.addEventListener("click", () => {
+      const currIndex = myLibrary.indexOf(this);
+      myLibrary.splice(currIndex,1);
+      this.currentRow.removeChild(card);
+    })
 
     card.appendChild(cardTtl);
     card.appendChild(cardAuthor);
@@ -47,22 +53,22 @@ class Book {
 
   displayCard(card) {
     // Keeps track of last row created
-    let currentRow  = this.cardContainer.lastElementChild;
+    this.currentRow  = this.cardContainer.lastElementChild;
 
     if (this.cardContainer.childElementCount === 0) {
       //creates row if it doesn't already exist
       this.createRow();
-      currentRow  = this.cardContainer.lastChild;
+      this.currentRow  = this.cardContainer.lastChild;
     }
 
-    if (currentRow.childElementCount < 5) {
+    if (this.currentRow.childElementCount < 5) {
       // Adds ensures that there are 5 card elements in a row
-      currentRow.appendChild(card);
+      this.currentRow.appendChild(card);
     } else {
       // creates new row after 5 cards are added and adds the 1st card in that row.
       this.createRow();
-      currentRow = this.cardContainer.lastChild;
-      currentRow.appendChild(card);
+      this.currentRow = this.cardContainer.lastChild;
+      this.currentRow.appendChild(card);
     }
   }
 
@@ -96,32 +102,21 @@ function AddBook() {
 
 function isBookInArray(library, newBook) {
   return library.some((book) => {
-    return book.name === newBook.name && book.author === newBook.author && book.numPages === newBook.numPages;
+    return book.title === newBook.title;
   });
 }
-
-function AddBookBtn(){
-
-}
-
 
 // Variables
 const myLibrary = [];
 const addBookForm = document.getElementById("addBookForm");
 const dialog = document.getElementById("form-modal");
-const showFormbtn = document.getElementById("add-new")
-showFormbtn.addEventListener("click", () => {
-  dialog.showModal();
-});
-
+const showFormbtn = document.getElementById("add-new");
 addBookForm.onsubmit = (event) => {
   // Processes file submission
   event.preventDefault();
   AddBook();
-  for (const book of myLibrary) {
-    console.log(book);
-  }
 }
+
 
 
 
