@@ -23,10 +23,15 @@ class Book {
     cardPages.classList.add("card-text");
     cardPages.textContent = "Number of Pages: " + this.numPages;
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('btn', 'btn-danger');
+    deleteBtn.textContent = "Delete Book";
+
+
     card.appendChild(cardTtl);
     card.appendChild(cardAuthor);
     card.appendChild(cardPages);
-
+    card.appendChild(deleteBtn);
 
     this.displayCard(card);
   }
