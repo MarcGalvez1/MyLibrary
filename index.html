@@ -7,32 +7,48 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="main.js" defer></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous" defer></script>
 </head>
 <body class="bg-dark">
     <div id="content-container" class="container-fluid">
         <div class="row justify-content-center" id="row-0">
-            <button class="col-1 ms-3 mt-2" id="add-new">Add Book</button>
+            <button class="col-1 ms-3 mt-2 btn btn-primary" data-toggle="modal" data-target="#form-modal" id="add-new">Add Book</button>
         </div>
     </div>
-    <div id="form-container" class="card mx-auto mt-5 custom-card-width">
-        <h5 class="card-header text-center bg-info">New Book</h5>
-        <form id="addBookForm" class="mx-2 mt-2">
-            <div class="form-group" id="Title-group">
-                <label for="Title" >Book Title:</label>
-                <input type="text" name="Title" id="Title" class="form-control">
+    <div id = "form-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div id="form-container" class="modal-dialog modal-dialog-centered" role="form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Book</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addBookForm" class="mx-2 mt-2">
+                        <div class="form-group" id="Title-group">
+                            <label for="Title" >Book Title:</label>
+                            <input type="text" name="Title" id="Title" class="form-control">
+                        </div>
+                        <div class="form-group" id="Author-group">
+                            <label for="Author" >Book Author:</label>
+                            <input type="text" name="Author" id="Author" class="form-control">
+                        </div>
+                        <div class="form-group" id="NumPages-group">
+                            <label for="NumPages" >Number of Pages:</label>
+                            <input type="number" name="NumPages" id="NumPages" class="form-control">
+                        </div>
+                        <div class="grid row mx-auto">
+                            <button type="submit" class="btn btn-primary my-2 col" id="submit"> Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group" id="Author-group">
-                <label for="Author" >Book Author:</label>
-                <input type="text" name="Author" id="Author" class="form-control">
-            </div>
-            <div class="form-group" id="NumPages-group">
-                <label for="NumPages" >Number of Pages:</label>
-                <input type="number" name="NumPages" id="NumPages" class="form-control">
-            </div>
-            <div class="grid row mx-auto">
-                <button type="submit" class="btn btn-primary my-2 col" id="submit"> Submit</button>
-            </div>
-        </form>
+        </div>
+
     </div>
 </body>
 </html>

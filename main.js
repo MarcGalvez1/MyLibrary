@@ -50,12 +50,9 @@ class Book {
       currentRow  = this.cardContainer.lastChild;
     }
 
-    console.log(currentRow);
-
     if (currentRow.childElementCount < 5) {
       // Adds ensures that there are 5 card elements in a row
       currentRow.appendChild(card);
-      console.log(currentRow);
     } else {
       // creates new row after 5 cards are added and adds the 1st card in that row.
       this.createRow();
@@ -98,12 +95,19 @@ function isBookInArray(library, newBook) {
   });
 }
 
+function AddBookBtn(){
+
+}
 
 
 // Variables
 const myLibrary = [];
 const addBookForm = document.getElementById("addBookForm");
-
+const dialog = document.getElementById("form-modal");
+const showFormbtn = document.getElementById("add-new")
+showFormbtn.addEventListener("click", () => {
+  dialog.showModal();
+});
 
 addBookForm.onsubmit = (event) => {
   // Processes file submission
