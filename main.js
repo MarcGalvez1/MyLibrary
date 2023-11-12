@@ -1,11 +1,13 @@
 class Book {
-  constructor(title, author, numPages) {
+  constructor(title, author, numPages, isRead) {
     // the constructor...
     this.title = title;
     this.author = author;
     this.numPages = numPages;
+    this.isRead = isRead;
     this.cardContainer = document.getElementById("content-container");
     this.currentRow = this.cardContainer.lastElementChild;
+    
   }
   createCard() {
     // Creates cards to display the books
@@ -34,12 +36,33 @@ class Book {
       this.currentRow.removeChild(card);
     })
 
+    const isReadBtn = document.createElement('button');
+    isReadBtn.classList.add('btn');
+    this.isReadBtnDisplay(isReadBtn);
+    isReadBtn.addEventListener("click", () => {
+      this.isRead = !this.isRead;
+      this.isReadBtnDisplay(isReadBtn);
+    })
+
     card.appendChild(cardTtl);
     card.appendChild(cardAuthor);
     card.appendChild(cardPages);
     card.appendChild(deleteBtn);
+    card.appendChild(isReadBtn);
 
     this.displayCard(card);
+  }
+  isReadBtnDisplay(isReadBtn) {
+    if (this.isRead) {
+      isReadBtn.classList.remove('btn-warning');
+      isReadBtn.classList.add('btn-success');
+      isReadBtn.textContent = "Completed";
+    } else {
+      isReadBtn.classList.remove('btn-success');
+      isReadBtn.classList.add('btn-warning');
+      isReadBtn.textContent = "Not Completed";
+    }
+
   }
 
   createRow() {
@@ -94,9 +117,9 @@ function AddBook() {
   let bookTtl = document.getElementById("Title").value;
   let bookAuthor = document.getElementById("Author").value;
   let numPages = document.getElementById("NumPages").value;
-
-  const newBook = new Book(bookTtl, bookAuthor, numPages);
-  
+  let isRead = document.getElementById("is-read").checked;
+  const newBook = new Book(bookTtl, bookAuthor, numPages, isRead);
+  console.log(isRead);
   addBookToLibrary(newBook);
 }
 
