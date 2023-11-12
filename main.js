@@ -93,9 +93,20 @@ function AddBook() {
   let bookAuthor = document.getElementById("Author").value;
   let numPages = document.getElementById("NumPages").value;
   let isRead = document.getElementById("is-read").checked;
+
+
   const newBook = new Book(bookTtl, bookAuthor, numPages, isRead);
   console.log(isRead);
+  ClearForm();
   addBookToLibrary(newBook);
+
+}
+
+function ClearForm () {
+  document.getElementById("Title").value = "";
+  document.getElementById("Author").value = "";
+  document.getElementById("NumPages").value = "";
+  document.getElementById("is-read").checked = false;
 }
 
 function isBookInArray(library, newBook) {
