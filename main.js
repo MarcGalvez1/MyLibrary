@@ -5,14 +5,13 @@ class Book {
     this.author = author;
     this.numPages = numPages;
     this.isRead = isRead;
-    this.cardContainer = document.getElementById("content-container");
-    this.currentRow = this.cardContainer.lastElementChild;
+    this.cardContainer = document.getElementById("row-0");
     
   }
   createCard() {
     // Creates cards to display the books
     const card = document.createElement('div');
-    card.classList.add('card', 'col-2', 'ms-3', 'mt-2');
+    card.classList.add('card', 'col-md-3', 'col-lg-2', 'ms-3', 'mt-2');
 
     const cardTtl = document.createElement('h5');
     cardTtl.classList.add('card-title');
@@ -29,11 +28,11 @@ class Book {
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('btn', 'btn-danger', 'my-2', 'text-light');
     deleteBtn.textContent = "Delete Book";
-    deleteBtn.id = 'delete-' + this.currentRow.childElementCount;
+    deleteBtn.id = 'delete-' + this.cardContainer.childElementCount;
     deleteBtn.addEventListener("click", () => {
       const currIndex = myLibrary.indexOf(this);
       myLibrary.splice(currIndex,1);
-      this.currentRow.removeChild(card);
+      this.cardContainer.removeChild(card);
     })
 
     const isReadBtn = document.createElement('button');
@@ -65,34 +64,10 @@ class Book {
 
   }
 
-  createRow() {
-    // Used to create rows
-    const cardRow = document.createElement('div');
-    cardRow.classList.add('row','justify-content-center');
-    cardRow.id = 'row-' + this.cardContainer.childElementCount;
-    this.cardContainer.appendChild(cardRow);
-  }
-
+ 
 
   displayCard(card) {
-    // Keeps track of last row created
-    this.currentRow  = this.cardContainer.lastElementChild;
-
-    if (this.cardContainer.childElementCount === 0) {
-      //creates row if it doesn't already exist
-      this.createRow();
-      this.currentRow  = this.cardContainer.lastChild;
-    }
-
-    if (this.currentRow.childElementCount < 5) {
-      // Adds ensures that there are 5 card elements in a row
-      this.currentRow.appendChild(card);
-    } else {
-      // creates new row after 5 cards are added and adds the 1st card in that row.
-      this.createRow();
-      this.currentRow = this.cardContainer.lastChild;
-      this.currentRow.appendChild(card);
-    }
+    this.cardContainer.appendChild(card);
   }
 
 }
