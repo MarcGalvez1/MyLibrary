@@ -12,7 +12,7 @@ class Book {
   createCard() {
     // Creates cards to display the books
     const card = document.createElement('div');
-    card.classList.add('card', 'col-1', 'ms-3', 'mt-2');
+    card.classList.add('card', 'col-2', 'ms-3', 'mt-2');
 
     const cardTtl = document.createElement('h5');
     cardTtl.classList.add('card-title');
@@ -27,7 +27,7 @@ class Book {
     cardPages.textContent = "Number of Pages: " + this.numPages;
 
     const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('btn', 'btn-danger');
+    deleteBtn.classList.add('btn', 'btn-danger', 'my-2', 'text-light');
     deleteBtn.textContent = "Delete Book";
     deleteBtn.id = 'delete-' + this.currentRow.childElementCount;
     deleteBtn.addEventListener("click", () => {
@@ -37,7 +37,7 @@ class Book {
     })
 
     const isReadBtn = document.createElement('button');
-    isReadBtn.classList.add('btn');
+    isReadBtn.classList.add('btn', 'my-2', 'text-light');
     this.isReadBtnDisplay(isReadBtn);
     isReadBtn.addEventListener("click", () => {
       this.isRead = !this.isRead;
